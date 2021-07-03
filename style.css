@@ -23,6 +23,13 @@ ul {
   padding: 0;
   margin: 0;
 }
+li {
+  padding: 10px;
+  border-bottom: 1px dotted gray;
+}
+li:first-child {
+  border-top: 1px dotted gray;
+}
 .sidefooter {
   height: 300px;
   /* display:flexをかける前提。上に開けられる幅があればあける。
@@ -31,12 +38,82 @@ ul {
 }
 
 /* ハンバーガーメニュー */
+
 .open,
 .close {
   display: none;
+}
+.close {
+  font-size: 2rem;
+  height: 52px;
+  padding-left: 10px;
 }
 
 input[type="checkbox"] {
   position: absolute;
   left: -50vw;
+}
+@media screen and (max-width: 1000px) {
+  main {
+    width: 100%;
+    padding-top: 50px;
+  }
+
+  .open,
+  .close {
+    display: block;
+  }
+
+  .open {
+    position: absolute;
+    height: 30px;
+    width: 32px;
+    padding: 10px;
+    border: solid 1px;
+    border-radius: 5px;
+  }
+
+  .open span.menu-line,
+  .open span.menu-line:before,
+  .open span.menu-line:after {
+    position: absolute;
+    height: 3px;
+    width: 32px;
+    border-radius: 3px;
+    background: #555;
+    display: block;
+    content: "";
+  }
+  .open span.menu-line:before {
+    bottom: -8px;
+  }
+  .open span.menu-line:after {
+    bottom: -16px;
+  }
+  .open .menu-text {
+    position: absolute;
+    top: 29px;
+    font-size: 12px;
+  }
+
+  aside {
+    position: absolute;
+    left: -250px; /* 隠す　*/
+    /* position:abosoluteをつけると高さが失われる */
+    height: 100%;
+    /* 0.4sを超えると遅くかんじる */
+    transition: all 0.2s;
+    background: #fff;
+  }
+  input[type="checkbox"]:checked ~ aside {
+    /* ~　間接セレクタ　input:checked（疑似クラス）と同じ親(=body)をもち、かつ後にある要素aside */
+    left: 0;
+  }
+
+  input[type="checkbox"]:checked ~ .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+  }
 }
